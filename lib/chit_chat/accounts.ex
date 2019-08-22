@@ -4,7 +4,7 @@ defmodule ChitChat.Accounts do
   """
 
   import Ecto.Query, warn: false
-  import Comeonin.Argon2, only: [checkpw: 2, dummy_checkpw: 0]
+  import Argon2, only: [verify_pass: 2, no_user_verify: 0]
 
   alias ChitChat.Repo
   alias ChitChat.Accounts.{Credential, User}
@@ -116,6 +116,24 @@ defmodule ChitChat.Accounts do
   end
 
   alias ChitChat.Accounts.Credential
+
+  def autheticate_by_email_password(email, given_pass) do
+    cred =
+      Repo.get_by(Credential, email: email)
+      |> Repo.preload(:user)
+
+    cond do
+      cred && verify_pass(given_pass, cred.password_hash) ->
+        {:ok, cred.user}
+
+      cred ->
+        {:error, :unauthorized}
+
+      true ->
+        no_user_verify()
+        {:error, :not_found}
+    end
+  end
 
   @doc """
   Returns the list of credentials.

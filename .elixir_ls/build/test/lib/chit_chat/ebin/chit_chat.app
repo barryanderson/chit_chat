@@ -19,6 +19,7 @@
                         'Elixir.ChitChatWeb.LayoutView',
                         'Elixir.ChitChatWeb.PageController',
                         'Elixir.ChitChatWeb.PageView',
+                        'Elixir.ChitChatWeb.RoomChannel',
                         'Elixir.ChitChatWeb.RoomController',
                         'Elixir.ChitChatWeb.RoomView',
                         'Elixir.ChitChatWeb.Router',

@@ -3,6 +3,7 @@ defmodule ChitChatWeb.RoomController do
 
   alias ChitChat.Chat
   alias ChitChat.Chat.Room
+  plug :admin_user when action in [:delete, :edit]
 
   def index(conn, _params) do
     rooms = Chat.list_rooms()

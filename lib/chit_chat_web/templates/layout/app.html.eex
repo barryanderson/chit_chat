@@ -12,12 +12,11 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <li><a href="https://hexdocs.pm/phoenix/ov erview.html">Get Started</a></li>
           </ul>
         </nav>
       </section>
     </header>
-    User ID: <%= @conn.assigns[:user_id] %>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

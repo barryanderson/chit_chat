@@ -23,6 +23,7 @@ defmodule ChitChatWeb do
 
       import Plug.Conn
       import ChitChatWeb.Gettext
+      import ChitChat.Auth, only: [logged_in_user: 2, admin_user: 2]
       alias ChitChatWeb.Router.Helpers, as: Routes
     end
   end

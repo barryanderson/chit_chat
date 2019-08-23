@@ -1,18 +1,25 @@
-<h1>Show Room</h1>
+<div class="row">
+  <div class="column column-50">
+    <h1>Room: <%= @room.name %></h1>
+    <%= content_tag :div, id: "room", data: [id: @room.id] do %>
+    <% end %>
+    <ul>
+      <li>
+        <strong>Description:</strong>
+        <%= @room.description %>
+      </li>
+    </ul>
+  </div>
+  <div class="column chat">
+    <h2>Chat</h2>
+    <div id="msg-container"></div>
+    <div>
+      <textarea id="msg-input" rows="3" placeholder="Enter chat message ..."></textarea>
+      <button id="msg-submit" class="button column" type="submit">Send</button>
+    </div>
+  </div>
+</div>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @room.name %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @room.description %>
-  </li>
-
-</ul>
 
 <span><%= link "Edit", to: Routes.room_path(@conn, :edit, @room) %></span>
 <span><%= link "Back", to: Routes.room_path(@conn, :index) %></span>

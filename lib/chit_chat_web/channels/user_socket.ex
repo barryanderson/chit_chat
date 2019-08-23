@@ -2,7 +2,7 @@ defmodule ChitChatWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ChitChatWeb.RoomChannel
+  channel "rooms:*", ChitChatWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

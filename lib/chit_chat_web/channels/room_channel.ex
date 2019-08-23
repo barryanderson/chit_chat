@@ -1,8 +1,9 @@
 defmodule ChitChatWeb.RoomChannel do
   use ChitChatWeb, :channel
-  alias ChitChat.Accounts
+  alias ChitChat.{Accounts, Presence}
 
   def join("rooms:" <> room_id, _payload, socket) do
+    send(self(), :after_join)
     {:ok, assign(socket, :room_id, String.to_integer(room_id))}
   end
 
@@ -23,5 +24,24 @@ defmodule ChitChatWeb.RoomChannel do
     })
 
     {:reply, :ok, socket}
+  end
+
+  def handle_info(:after_join, socket) do
+    pres = Presence.list(socket)
+    push(socket, "presence_state", pres)
+    guests = if Map.has_key?(pres, ""), do: pres[""].metas, else: []
+    num_guests = Enum.count(guests)
+    users = Enum.filter(pres, fn {k, _} -> k =~ ~r/^\d+$/ end)
+    num_users = Enum.count(users)
+
+    IO.puts("Presence info #{inspect(pres)}")
+    IO.puts("Users: #{num_users}, Guests: #{num_guests}")
+
+    {:ok, _} =
+      Presence.track(socket, socket.assigns.user_id, %{
+        online_at: System.system_time(:second)
+      })
+
+    {:noreply, socket}
   end
 end

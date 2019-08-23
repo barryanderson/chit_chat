@@ -17,6 +17,8 @@
       <textarea id="msg-input" rows="3" placeholder="Enter chat message ..."></textarea>
       <button id="msg-submit" class="button column" type="submit">Send</button>
     </div>
+    <br>
+    <div id="user-container"></div>
   </div>
 </div>
 

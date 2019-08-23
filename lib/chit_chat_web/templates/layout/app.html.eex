@@ -12,7 +12,17 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/ov erview.html">Get Started</a></li>
+            <li>
+              <%= if @current_user do %>
+                <%=
+                  link @current_user.username,
+                  to: Routes.user_path(@conn, :show, @current_user)
+                %>
+                <%= link "Log out", to: "/logout" %>
+              <% else %>
+                <%= link "Log in", to: "/login" %>
+              <% end %>
+            </li>
           </ul>
         </nav>
       </section>

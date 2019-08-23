@@ -11,9 +11,10 @@ defmodule ChitChat.Application do
       # Start the Ecto repository
       ChitChat.Repo,
       # Start the endpoint when the application starts
-      ChitChatWeb.Endpoint
+      ChitChatWeb.Endpoint,
       # Starts a worker by calling: ChitChat.Worker.start_link(arg)
       # {ChitChat.Worker, arg},
+      ChitChat.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
